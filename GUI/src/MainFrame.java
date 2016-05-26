@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.plaf.DimensionUIResource;
 import java.awt.*;
 
 /**
@@ -11,6 +10,8 @@ public class MainFrame extends JFrame {
         this.setTitle("KC111シミュレータ");
         this.setSize(new Dimension(800, 600));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        this.setContentPane(new LayoutPane(getSize()));
 
         this.setVisible(true);
     }
