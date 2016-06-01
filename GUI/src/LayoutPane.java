@@ -12,7 +12,6 @@ public class LayoutPane extends JLayeredPane{
 
     private int room_width = 604, room_height = 562;
 
-
     LayoutPane(Dimension parent_dimension) {
         this.setPreferredSize(parent_dimension);
         this.setSize(parent_dimension);
@@ -22,10 +21,8 @@ public class LayoutPane extends JLayeredPane{
         setLight_layout();
         sensor_layout = new JPanel();
 
-        this.add(light_layout, JLayeredPane.DEFAULT_LAYER);
-        this.add(room_layout, JLayeredPane.DEFAULT_LAYER);
-
-
+        setLightLayoutVisible(true);
+        setRoomLayoutVisible(true);
     }
 
     public void setRoom_layout() {
@@ -36,22 +33,30 @@ public class LayoutPane extends JLayeredPane{
         room_layout.setBackground(null);
     }
 
-    /*
     public void setLight_layout() {
         light_layout = new JPanel();
         light_layout.setOpaque(false);
-        light_layout.setBounds(0, 0, getWidth(), getHeight());
+        // light_layout.setBounds(0, 0, getWidth(), getHeight());
+        light_layout.setBounds(2+getWidth()/2-(room_width/2), 6+(getHeight()-20)/2-(room_height/2), room_width-2, room_height-6);
         light_layout.setLayout(null);
 
         JSVGCanvas lightCanvas[] = new JSVGCanvas[12];
         for(int i = 0; i<12; i++) {
             lightCanvas[i] = new JSVGCanvas();
             lightCanvas[i].setURI("GUI/light.svg");
-            lightCanvas[i].setBounds(147+(i/3)*152,113+(i%3)*152, 50, 50);
+            // lightCanvas[i].setBounds(2+getWidth()/2-(room_width/2)+50+(i/3)*150, 6+(getHeight()-20)/2-(room_height/2)+100+(i%3)*150, 50, 50);
+            lightCanvas[i].setBounds(50+(i/3)*150, 100+(i%3)*150, 50, 50);
             light_layout.add(lightCanvas[i]);
         }
     }
-    */
+
+    public void setSensor_layout() {
+        sensor_layout = new JPanel();
+        sensor_layout.setOpaque(false);
+        //sensor_layout.setBounds();
+    }
+
+    // 全グリッドにライトを入れるテスト
     /*
     public void setLight_layout() {
         light_layout = new JPanel();
@@ -69,18 +74,19 @@ public class LayoutPane extends JLayeredPane{
     }
     */
 
-    public void setLight_layout() {
-        light_layout = new JPanel();
-        light_layout.setOpaque(false);
-        light_layout.setBounds(0, 0, getWidth(), getHeight());
-        light_layout.setLayout(null);
+    public void setRoomLayoutVisible(boolean visible) {
+        if(visible) {
+            this.add(room_layout, JLayeredPane.DEFAULT_LAYER);
+        } else {
+            this.remove(room_layout);
+        }
+    }
 
-        JSVGCanvas lightCanvas[] = new JSVGCanvas[12];
-        for(int i = 0; i<12; i++) {
-            lightCanvas[i] = new JSVGCanvas();
-            lightCanvas[i].setURI("GUI/light.svg");
-            lightCanvas[i].setBounds(2+getWidth()/2-(room_width/2)+50+(i/3)*150, 6+(getHeight()-20)/2-(room_height/2)+100+(i%3)*150, 50, 50);
-            light_layout.add(lightCanvas[i]);
+    public void setLightLayoutVisible(boolean visible) {
+        if(visible) {
+            this.add(light_layout, JLayeredPane.DEFAULT_LAYER);
+        } else {
+            this.remove(light_layout);
         }
     }
 
