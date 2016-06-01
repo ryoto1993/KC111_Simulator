@@ -10,7 +10,7 @@ public class LayoutController {
 
     }
 
-    public static void setLatoutPane(LayoutPane pane) {
+    public static void setLayoutPane(LayoutPane pane) {
         LayoutController.pane = pane;
     }
 

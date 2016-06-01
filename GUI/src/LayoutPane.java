@@ -13,7 +13,7 @@ public class LayoutPane extends JLayeredPane{
     private static int ROOM_WIDTH = 604, ROOM_HEIGHT = 562;
 
     LayoutPane(Dimension parent_dimension) {
-        LayoutController.setLatoutPane(this);
+        LayoutController.setLayoutPane(this);
 
         this.setPreferredSize(parent_dimension);
         this.setSize(parent_dimension);
@@ -60,7 +60,7 @@ public class LayoutPane extends JLayeredPane{
 
     public void setRoomLayoutVisible(boolean visible) {
         if(visible) {
-            this.add(room_layout, JLayeredPane.DEFAULT_LAYER);
+            this.add(room_layout, JLayeredPane.FRAME_CONTENT_LAYER);
         } else {
             this.remove(room_layout);
         }
