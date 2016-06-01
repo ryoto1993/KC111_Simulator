@@ -10,6 +10,8 @@ public class LayoutPane extends JLayeredPane{
     private JPanel light_layout, sensor_layout;
     private JSVGCanvas room_layout;
 
+    private int room_width = 604, room_height = 562;
+
 
     LayoutPane(Dimension parent_dimension) {
         this.setPreferredSize(parent_dimension);
@@ -29,11 +31,12 @@ public class LayoutPane extends JLayeredPane{
     public void setRoom_layout() {
         room_layout = new JSVGCanvas();
         room_layout.setURI("GUI/KC111_Ceiling.svg");
-        room_layout.setBounds(getWidth()/2-(614/2), (getHeight()-20)/2-(562/2), 614, 562);
+        room_layout.setBounds(getWidth()/2-(room_width/2), (getHeight()-20)/2-(room_height/2), room_width, room_height);
         room_layout.setOpaque(false);
         room_layout.setBackground(null);
     }
 
+    /*
     public void setLight_layout() {
         light_layout = new JPanel();
         light_layout.setOpaque(false);
@@ -45,6 +48,38 @@ public class LayoutPane extends JLayeredPane{
             lightCanvas[i] = new JSVGCanvas();
             lightCanvas[i].setURI("GUI/light.svg");
             lightCanvas[i].setBounds(147+(i/3)*152,113+(i%3)*152, 50, 50);
+            light_layout.add(lightCanvas[i]);
+        }
+    }
+    */
+    /*
+    public void setLight_layout() {
+        light_layout = new JPanel();
+        light_layout.setOpaque(false);
+        light_layout.setBounds(0, 0, getWidth(), getHeight());
+        light_layout.setLayout(null);
+
+        JSVGCanvas lightCanvas[] = new JSVGCanvas[120];
+        for(int i = 0; i<120; i++) {
+            lightCanvas[i] = new JSVGCanvas();
+            lightCanvas[i].setURI("GUI/light.svg");
+            lightCanvas[i].setBounds(2+getWidth()/2-(room_width/2)+(i/10)*50, 6+(getHeight()-20)/2-(room_height/2)+(i%10)*50, 50, 50);
+            light_layout.add(lightCanvas[i]);
+        }
+    }
+    */
+
+    public void setLight_layout() {
+        light_layout = new JPanel();
+        light_layout.setOpaque(false);
+        light_layout.setBounds(0, 0, getWidth(), getHeight());
+        light_layout.setLayout(null);
+
+        JSVGCanvas lightCanvas[] = new JSVGCanvas[12];
+        for(int i = 0; i<12; i++) {
+            lightCanvas[i] = new JSVGCanvas();
+            lightCanvas[i].setURI("GUI/light.svg");
+            lightCanvas[i].setBounds(2+getWidth()/2-(room_width/2)+50+(i/3)*150, 6+(getHeight()-20)/2-(room_height/2)+100+(i%3)*150, 50, 50);
             light_layout.add(lightCanvas[i]);
         }
     }

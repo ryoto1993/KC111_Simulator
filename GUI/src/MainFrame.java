@@ -5,6 +5,8 @@ import java.awt.*;
  * Created by RyotoTomioka on 2016/05/26.
  */
 public class MainFrame extends JFrame {
+
+
     MainFrame() {
         super();
         this.setTitle("KC111シミュレータ");
