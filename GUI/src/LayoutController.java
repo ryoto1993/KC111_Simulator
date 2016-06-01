@@ -16,17 +16,19 @@ public class LayoutController {
 
     public static void setLightLayoutVisible(boolean visible) {
         if(visible) {
-            pane.add(pane.light_layout, JLayeredPane.DEFAULT_LAYER);
+            pane.add(pane.light_layout, 10);
         } else {
             pane.remove(pane.light_layout);
         }
+        pane.repaint();
     }
 
     public static void setSensorLayoutVisible(boolean visible) {
         if(visible) {
-            pane.add(pane.sensor_layout, JLayeredPane.DEFAULT_LAYER);
+            pane.add(pane.sensor_layout, 20);
         } else {
             pane.remove(pane.sensor_layout);
         }
+        pane.repaint();
     }
 }

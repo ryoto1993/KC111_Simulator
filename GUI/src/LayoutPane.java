@@ -19,8 +19,8 @@ public class LayoutPane extends JLayeredPane{
         this.setSize(parent_dimension);
         this.setLayout(null);
 
-        setRoom_layout();
         setLight_layout();
+        setRoom_layout();
         setSensor_layout();
 
         LayoutController.setLightLayoutVisible(true);

@@ -17,6 +17,7 @@ public class MainFrame extends JFrame {
 
         layoutPane = new LayoutPane(new Dimension(800, 600));
         this.getContentPane().add(layoutPane, BorderLayout.CENTER);
+        this.getContentPane().add(new ControlPanel(), BorderLayout.SOUTH);
 
         this.setVisible(true);
     }
