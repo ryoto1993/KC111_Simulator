@@ -16,24 +16,23 @@ public class LayoutPane extends JLayeredPane{
     private static int ROOM_WIDTH = 604, ROOM_HEIGHT = 562;
 
     LayoutPane(Dimension parent_dimension) {
-        LayoutController.setLayoutPane(this);
+        SimulationController.setLayoutPane(this);
 
         this.setPreferredSize(parent_dimension);
         this.setSize(parent_dimension);
         this.setLayout(null);
 
-        try {
-            LayoutController.setLight();
-        } catch (IOException e) {}
+        SimulationController.setLight();
+        SimulationController.setLightHistory();
 
         setLight_layout();
         setRoom_layout();
         setSensor_layout();
         setLight_Pattern();
 
-        LayoutController.setLightLayoutVisible(true);
-        LayoutController.setSensorLayoutVisible(true);
-        LayoutController.setLightPatternVisible(true);
+        SimulationController.setLightPatternVisible(true);
+        SimulationController.setSensorLayoutVisible(true);
+        SimulationController.setLightLayoutVisible(true);
         setRoomLayoutVisible(true);
     }
 
@@ -51,7 +50,7 @@ public class LayoutPane extends JLayeredPane{
         light_layout.setBounds(2+getWidth()/2-(ROOM_WIDTH /2), 6+(getHeight()-30)/2-(ROOM_HEIGHT /2), ROOM_WIDTH -4, ROOM_HEIGHT -12);
         light_layout.setLayout(null);
 
-        ArrayList<Light> lights = LayoutController.lights;
+        ArrayList<Light> lights = SimulationController.lights;
         JSVGCanvas lightCanvas[] = new JSVGCanvas[lights.size()];
         for(int i = 0; i<lights.size(); i++) {
             lightCanvas[i] = new JSVGCanvas();

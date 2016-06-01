@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Light {
     static int ID = 0;
     static int MINLUM = 0;
-    static int MAXLUM = 100;
+    static int MAXLUM = 1000;
 
     private int id;
     private int x, y;
@@ -16,6 +16,8 @@ public class Light {
         id = ID++;
         this.x = x;
         this.y = y;
+
+        lum_history = new ArrayList<>();
     }
 
     public void appendHistory(int l) {
@@ -28,5 +30,9 @@ public class Light {
 
     public int getY() {
         return y;
+    }
+
+    public int getLum(int s) {
+        return lum_history.get(s);
     }
 }

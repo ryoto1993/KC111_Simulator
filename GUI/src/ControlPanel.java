@@ -32,17 +32,17 @@ public class ControlPanel extends JPanel implements ActionListener{
         if(e.getActionCommand().equals("showLight")) {
             JCheckBox tmp = (JCheckBox) e.getSource();
             if(tmp.isSelected()) {
-                LayoutController.setLightLayoutVisible(true);
+                SimulationController.setLightLayoutVisible(true);
             } else {
-                LayoutController.setLightLayoutVisible(false);
+                SimulationController.setLightLayoutVisible(false);
             }
         }
         else if(e.getActionCommand().equals("showPattern")) {
             JCheckBox tmp = (JCheckBox) e.getSource();
             if(tmp.isSelected()) {
-                LayoutController.setLightPatternVisible(true);
+                SimulationController.setLightPatternVisible(true);
             } else {
-                LayoutController.setLightPatternVisible(false);
+                SimulationController.setLightPatternVisible(false);
             }
         }
     }
