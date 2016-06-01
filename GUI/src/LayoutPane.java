@@ -8,6 +8,7 @@ import java.awt.*;
  */
 public class LayoutPane extends JLayeredPane{
     public JPanel light_layout, sensor_layout;
+    public KC111Canvas light_pattern;
     private JSVGCanvas room_layout;
 
     private static int ROOM_WIDTH = 604, ROOM_HEIGHT = 562;
@@ -22,16 +23,18 @@ public class LayoutPane extends JLayeredPane{
         setLight_layout();
         setRoom_layout();
         setSensor_layout();
+        setLight_Pattern();
 
         LayoutController.setLightLayoutVisible(true);
         LayoutController.setSensorLayoutVisible(true);
+        LayoutController.setLightPatternVisible(true);
         setRoomLayoutVisible(true);
     }
 
     public void setRoom_layout() {
         room_layout = new JSVGCanvas();
         room_layout.setURI("GUI/svg/KC111_Ceiling.svg");
-        room_layout.setBounds(getWidth()/2-(ROOM_WIDTH /2), (getHeight()-20)/2-(ROOM_HEIGHT /2), ROOM_WIDTH, ROOM_HEIGHT);
+        room_layout.setBounds(getWidth()/2-(ROOM_WIDTH /2), (getHeight()-30)/2-(ROOM_HEIGHT /2), ROOM_WIDTH, ROOM_HEIGHT);
         room_layout.setOpaque(false);
         room_layout.setBackground(null);
     }
@@ -39,7 +42,7 @@ public class LayoutPane extends JLayeredPane{
     public void setLight_layout() {
         light_layout = new JPanel();
         light_layout.setOpaque(false);
-        light_layout.setBounds(2+getWidth()/2-(ROOM_WIDTH /2), 6+(getHeight()-20)/2-(ROOM_HEIGHT /2), ROOM_WIDTH -2, ROOM_HEIGHT -6);
+        light_layout.setBounds(2+getWidth()/2-(ROOM_WIDTH /2), 6+(getHeight()-30)/2-(ROOM_HEIGHT /2), ROOM_WIDTH -4, ROOM_HEIGHT -12);
         light_layout.setLayout(null);
 
         JSVGCanvas lightCanvas[] = new JSVGCanvas[12];
@@ -54,8 +57,15 @@ public class LayoutPane extends JLayeredPane{
     public void setSensor_layout() {
         sensor_layout = new JPanel();
         sensor_layout.setOpaque(false);
-        sensor_layout.setBounds(2+getWidth()/2-(ROOM_WIDTH /2), 6+(getHeight()-20)/2-(ROOM_HEIGHT /2), ROOM_WIDTH -2, ROOM_HEIGHT -6);
+        sensor_layout.setBounds(2+getWidth()/2-(ROOM_WIDTH /2), 6+(getHeight()-30)/2-(ROOM_HEIGHT /2), ROOM_WIDTH -4, ROOM_HEIGHT -12);
         sensor_layout.setLayout(null);
+    }
+
+    public void setLight_Pattern() {
+        light_pattern = new KC111Canvas();
+        light_pattern.setBounds(2+getWidth()/2-(ROOM_WIDTH /2), 6+(getHeight()-30)/2-(ROOM_HEIGHT /2), ROOM_WIDTH -4, ROOM_HEIGHT -12);
+        light_pattern.setOpaque(false);
+
     }
 
     public void setRoomLayoutVisible(boolean visible) {

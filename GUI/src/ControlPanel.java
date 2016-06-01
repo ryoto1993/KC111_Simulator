@@ -1,4 +1,3 @@
-import javax.sound.midi.ControllerEventListener;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,6 +18,13 @@ public class ControlPanel extends JPanel implements ActionListener{
         ck_showLight.setSelected(true);
         this.add(ck_showLight);
 
+        // 点灯パターン表示/非表示切り替え
+        JCheckBox ck_showPattern = new JCheckBox("照明点灯パターンを表示");
+        ck_showPattern.setActionCommand("showPattern");
+        ck_showPattern.addActionListener(this);
+        ck_showPattern.setSelected(true);
+        this.add(ck_showPattern);
+
     }
 
     @Override
@@ -27,10 +33,16 @@ public class ControlPanel extends JPanel implements ActionListener{
             JCheckBox tmp = (JCheckBox) e.getSource();
             if(tmp.isSelected()) {
                 LayoutController.setLightLayoutVisible(true);
-                System.out.println("On");
             } else {
                 LayoutController.setLightLayoutVisible(false);
-                System.out.println("Off");
+            }
+        }
+        else if(e.getActionCommand().equals("showPattern")) {
+            JCheckBox tmp = (JCheckBox) e.getSource();
+            if(tmp.isSelected()) {
+                LayoutController.setLightPatternVisible(true);
+            } else {
+                LayoutController.setLightPatternVisible(false);
             }
         }
     }

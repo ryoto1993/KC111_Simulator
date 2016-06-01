@@ -5,13 +5,18 @@ import javax.swing.*;
  */
 public class LayoutController {
     private static LayoutPane pane;
+    private static KC111Canvas canvas;
 
     public LayoutController() {
 
     }
 
-    public static void setLayoutPane(LayoutPane pane) {
-        LayoutController.pane = pane;
+    public static void setLayoutPane(LayoutPane p) {
+        pane = p;
+    }
+
+    public static void setCanvas(KC111Canvas c) {
+        canvas = c;
     }
 
     public static void setLightLayoutVisible(boolean visible) {
@@ -19,6 +24,15 @@ public class LayoutController {
             pane.add(pane.light_layout, 10);
         } else {
             pane.remove(pane.light_layout);
+        }
+        pane.repaint();
+    }
+
+    public static void setLightPatternVisible(boolean visible) {
+        if(visible) {
+            pane.add(pane.light_pattern, 100);
+        } else {
+            pane.remove(pane.light_pattern);
         }
         pane.repaint();
     }
