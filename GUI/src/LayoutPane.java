@@ -28,7 +28,7 @@ public class LayoutPane extends JLayeredPane{
 
     public void setRoom_layout() {
         room_layout = new JSVGCanvas();
-        room_layout.setURI("GUI/KC111_Ceiling.svg");
+        room_layout.setURI("GUI/svg/KC111_Ceiling.svg");
         room_layout.setBounds(getWidth()/2-(room_width/2), (getHeight()-20)/2-(room_height/2), room_width, room_height);
         room_layout.setOpaque(false);
         room_layout.setBackground(null);
@@ -43,7 +43,7 @@ public class LayoutPane extends JLayeredPane{
         JSVGCanvas lightCanvas[] = new JSVGCanvas[12];
         for(int i = 0; i<12; i++) {
             lightCanvas[i] = new JSVGCanvas();
-            lightCanvas[i].setURI("GUI/light.svg");
+            lightCanvas[i].setURI("GUI/svg/light.svg");
             lightCanvas[i].setBounds(50+(i/3)*150, 100+(i%3)*150, 50, 50);
             light_layout.add(lightCanvas[i]);
         }
@@ -55,24 +55,6 @@ public class LayoutPane extends JLayeredPane{
         sensor_layout.setBounds(2+getWidth()/2-(room_width/2), 6+(getHeight()-20)/2-(room_height/2), room_width-2, room_height-6);
         sensor_layout.setLayout(null);
     }
-
-    // 全グリッドにライトを入れるテスト
-    /*
-    public void setLight_layout() {
-        light_layout = new JPanel();
-        light_layout.setOpaque(false);
-        light_layout.setBounds(0, 0, getWidth(), getHeight());
-        light_layout.setLayout(null);
-
-        JSVGCanvas lightCanvas[] = new JSVGCanvas[120];
-        for(int i = 0; i<120; i++) {
-            lightCanvas[i] = new JSVGCanvas();
-            lightCanvas[i].setURI("GUI/light.svg");
-            lightCanvas[i].setBounds(2+getWidth()/2-(room_width/2)+(i/10)*50, 6+(getHeight()-20)/2-(room_height/2)+(i%10)*50, 50, 50);
-            light_layout.add(lightCanvas[i]);
-        }
-    }
-    */
 
     public void setRoomLayoutVisible(boolean visible) {
         if(visible) {
