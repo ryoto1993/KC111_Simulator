@@ -19,9 +19,10 @@ public class LayoutPane extends JLayeredPane{
 
         setRoom_layout();
         setLight_layout();
-        sensor_layout = new JPanel();
+        setSensor_layout();
 
         setLightLayoutVisible(true);
+        setSensorLayoutVisible(true);
         setRoomLayoutVisible(true);
     }
 
@@ -36,7 +37,6 @@ public class LayoutPane extends JLayeredPane{
     public void setLight_layout() {
         light_layout = new JPanel();
         light_layout.setOpaque(false);
-        // light_layout.setBounds(0, 0, getWidth(), getHeight());
         light_layout.setBounds(2+getWidth()/2-(room_width/2), 6+(getHeight()-20)/2-(room_height/2), room_width-2, room_height-6);
         light_layout.setLayout(null);
 
@@ -44,7 +44,6 @@ public class LayoutPane extends JLayeredPane{
         for(int i = 0; i<12; i++) {
             lightCanvas[i] = new JSVGCanvas();
             lightCanvas[i].setURI("GUI/light.svg");
-            // lightCanvas[i].setBounds(2+getWidth()/2-(room_width/2)+50+(i/3)*150, 6+(getHeight()-20)/2-(room_height/2)+100+(i%3)*150, 50, 50);
             lightCanvas[i].setBounds(50+(i/3)*150, 100+(i%3)*150, 50, 50);
             light_layout.add(lightCanvas[i]);
         }
@@ -53,7 +52,8 @@ public class LayoutPane extends JLayeredPane{
     public void setSensor_layout() {
         sensor_layout = new JPanel();
         sensor_layout.setOpaque(false);
-        //sensor_layout.setBounds();
+        sensor_layout.setBounds(2+getWidth()/2-(room_width/2), 6+(getHeight()-20)/2-(room_height/2), room_width-2, room_height-6);
+        sensor_layout.setLayout(null);
     }
 
     // 全グリッドにライトを入れるテスト
@@ -87,6 +87,14 @@ public class LayoutPane extends JLayeredPane{
             this.add(light_layout, JLayeredPane.DEFAULT_LAYER);
         } else {
             this.remove(light_layout);
+        }
+    }
+
+    public void setSensorLayoutVisible(boolean visible) {
+        if(visible) {
+            this.add(sensor_layout, JLayeredPane.DEFAULT_LAYER);
+        } else {
+            this.remove(sensor_layout);
         }
     }
 
