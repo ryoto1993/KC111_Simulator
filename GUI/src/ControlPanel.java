@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,7 +8,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by RyotoTomioka on 2016/06/01.
  */
-public class ControlPanel extends JPanel implements ActionListener{
+public class ControlPanel extends JPanel implements ActionListener, ChangeListener{
 
     public ControlPanel() {
         this.setLayout(new GridLayout(5, 1));
@@ -24,6 +26,11 @@ public class ControlPanel extends JPanel implements ActionListener{
         ck_showPattern.addActionListener(this);
         ck_showPattern.setSelected(true);
         this.add(ck_showPattern);
+
+        // ステップの切り替え
+        JSlider sl_step = new JSlider(0, 1000, 0);
+        sl_step.addChangeListener(this);
+        this.add(sl_step);
 
     }
 
@@ -45,5 +52,12 @@ public class ControlPanel extends JPanel implements ActionListener{
                 SimulationController.setLightPatternVisible(false);
             }
         }
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        JSlider sl = (JSlider)e.getSource();
+        SimulationController.setStep(sl.getValue());
+        SimulationController.updateCanvas();
     }
 }

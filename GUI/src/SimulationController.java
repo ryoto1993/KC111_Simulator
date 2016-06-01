@@ -103,4 +103,12 @@ public class SimulationController {
     public static int getStep() {
         return step;
     }
+
+    public static void setStep(int s) {
+        step = s;
+    }
+
+    public static void updateCanvas() {
+        canvas.repaint();
+    }
 }

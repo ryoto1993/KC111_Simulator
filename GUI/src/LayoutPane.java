@@ -21,6 +21,7 @@ public class LayoutPane extends JLayeredPane{
         this.setPreferredSize(parent_dimension);
         this.setSize(parent_dimension);
         this.setLayout(null);
+        this.setBackground(Color.white);
 
         SimulationController.setLight();
         SimulationController.setLightHistory();
