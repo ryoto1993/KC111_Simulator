@@ -7,12 +7,14 @@ import java.awt.*;
  * Created by RyotoTomioka on 2016/05/26.
  */
 public class LayoutPane extends JLayeredPane{
-    private JPanel light_layout, sensor_layout;
+    public JPanel light_layout, sensor_layout;
     private JSVGCanvas room_layout;
 
-    private int room_width = 604, room_height = 562;
+    private static int ROOM_WIDTH = 604, ROOM_HEIGHT = 562;
 
     LayoutPane(Dimension parent_dimension) {
+        LayoutController.setLatoutPane(this);
+
         this.setPreferredSize(parent_dimension);
         this.setSize(parent_dimension);
         this.setLayout(null);
@@ -21,15 +23,15 @@ public class LayoutPane extends JLayeredPane{
         setLight_layout();
         setSensor_layout();
 
-        setLightLayoutVisible(true);
-        setSensorLayoutVisible(true);
+        LayoutController.setLightLayoutVisible(true);
+        LayoutController.setSensorLayoutVisible(true);
         setRoomLayoutVisible(true);
     }
 
     public void setRoom_layout() {
         room_layout = new JSVGCanvas();
         room_layout.setURI("GUI/svg/KC111_Ceiling.svg");
-        room_layout.setBounds(getWidth()/2-(room_width/2), (getHeight()-20)/2-(room_height/2), room_width, room_height);
+        room_layout.setBounds(getWidth()/2-(ROOM_WIDTH /2), (getHeight()-20)/2-(ROOM_HEIGHT /2), ROOM_WIDTH, ROOM_HEIGHT);
         room_layout.setOpaque(false);
         room_layout.setBackground(null);
     }
@@ -37,7 +39,7 @@ public class LayoutPane extends JLayeredPane{
     public void setLight_layout() {
         light_layout = new JPanel();
         light_layout.setOpaque(false);
-        light_layout.setBounds(2+getWidth()/2-(room_width/2), 6+(getHeight()-20)/2-(room_height/2), room_width-2, room_height-6);
+        light_layout.setBounds(2+getWidth()/2-(ROOM_WIDTH /2), 6+(getHeight()-20)/2-(ROOM_HEIGHT /2), ROOM_WIDTH -2, ROOM_HEIGHT -6);
         light_layout.setLayout(null);
 
         JSVGCanvas lightCanvas[] = new JSVGCanvas[12];
@@ -52,7 +54,7 @@ public class LayoutPane extends JLayeredPane{
     public void setSensor_layout() {
         sensor_layout = new JPanel();
         sensor_layout.setOpaque(false);
-        sensor_layout.setBounds(2+getWidth()/2-(room_width/2), 6+(getHeight()-20)/2-(room_height/2), room_width-2, room_height-6);
+        sensor_layout.setBounds(2+getWidth()/2-(ROOM_WIDTH /2), 6+(getHeight()-20)/2-(ROOM_HEIGHT /2), ROOM_WIDTH -2, ROOM_HEIGHT -6);
         sensor_layout.setLayout(null);
     }
 
@@ -63,21 +65,4 @@ public class LayoutPane extends JLayeredPane{
             this.remove(room_layout);
         }
     }
-
-    public void setLightLayoutVisible(boolean visible) {
-        if(visible) {
-            this.add(light_layout, JLayeredPane.DEFAULT_LAYER);
-        } else {
-            this.remove(light_layout);
-        }
-    }
-
-    public void setSensorLayoutVisible(boolean visible) {
-        if(visible) {
-            this.add(sensor_layout, JLayeredPane.DEFAULT_LAYER);
-        } else {
-            this.remove(sensor_layout);
-        }
-    }
-
 }
