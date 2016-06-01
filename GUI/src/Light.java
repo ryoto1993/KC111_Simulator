@@ -15,4 +15,16 @@ public class Light {
         this.x = x;
         this.y = y;
     }
+
+    public void appendHistory(int l) {
+        lum_history.add(l);
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 }

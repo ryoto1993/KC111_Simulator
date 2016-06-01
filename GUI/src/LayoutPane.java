@@ -2,6 +2,8 @@ import javax.swing.*;
 import org.apache.batik.swing.*;
 
 import java.awt.*;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by RyotoTomioka on 2016/05/26.
@@ -20,6 +22,10 @@ public class LayoutPane extends JLayeredPane{
         this.setSize(parent_dimension);
         this.setLayout(null);
 
+        try {
+            LayoutController.setLight();
+        } catch (IOException e) {}
+
         setLight_layout();
         setRoom_layout();
         setSensor_layout();
@@ -33,7 +39,7 @@ public class LayoutPane extends JLayeredPane{
 
     public void setRoom_layout() {
         room_layout = new JSVGCanvas();
-        room_layout.setURI("GUI/svg/KC111_Ceiling.svg");
+        room_layout.setURI("svg/KC111_Ceiling.svg");
         room_layout.setBounds(getWidth()/2-(ROOM_WIDTH /2), (getHeight()-30)/2-(ROOM_HEIGHT /2), ROOM_WIDTH, ROOM_HEIGHT);
         room_layout.setOpaque(false);
         room_layout.setBackground(null);
@@ -45,11 +51,12 @@ public class LayoutPane extends JLayeredPane{
         light_layout.setBounds(2+getWidth()/2-(ROOM_WIDTH /2), 6+(getHeight()-30)/2-(ROOM_HEIGHT /2), ROOM_WIDTH -4, ROOM_HEIGHT -12);
         light_layout.setLayout(null);
 
-        JSVGCanvas lightCanvas[] = new JSVGCanvas[12];
-        for(int i = 0; i<12; i++) {
+        ArrayList<Light> lights = LayoutController.lights;
+        JSVGCanvas lightCanvas[] = new JSVGCanvas[lights.size()];
+        for(int i = 0; i<lights.size(); i++) {
             lightCanvas[i] = new JSVGCanvas();
-            lightCanvas[i].setURI("GUI/svg/light.svg");
-            lightCanvas[i].setBounds(50+(i/3)*150, 100+(i%3)*150, 50, 50);
+            lightCanvas[i].setURI("svg/light.svg");
+            lightCanvas[i].setBounds((lights.get(i).getX()-1)*50, (lights.get(i).getY()-1)*50, 50, 50);
             light_layout.add(lightCanvas[i]);
         }
     }
