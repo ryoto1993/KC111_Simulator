@@ -9,6 +9,16 @@ public class MainFrame extends JFrame {
 
     MainFrame() {
         super();
+
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception e) {}
+
         this.setTitle("KC111シミュレータ");
         this.setSize(new Dimension(800, 800));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

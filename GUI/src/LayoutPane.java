@@ -1,8 +1,9 @@
 import javax.swing.*;
+
+import javafx.scene.layout.Background;
 import org.apache.batik.swing.*;
 
 import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -20,8 +21,6 @@ public class LayoutPane extends JLayeredPane{
 
         this.setPreferredSize(parent_dimension);
         this.setSize(parent_dimension);
-        this.setLayout(null);
-        this.setBackground(Color.white);
 
         SimulationController.setLight();
         SimulationController.setLightHistory();

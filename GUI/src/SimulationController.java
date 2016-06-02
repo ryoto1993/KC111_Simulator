@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -75,7 +76,8 @@ public class SimulationController {
 
     public static void setLightLayoutVisible(boolean visible) {
         if(visible) {
-            pane.add(pane.light_layout, 10);
+            pane.add(pane.light_layout, JLayeredPane.DEFAULT_LAYER);
+            pane.setLayer(pane.light_layout, 10);
         } else {
             pane.remove(pane.light_layout);
         }
@@ -84,7 +86,8 @@ public class SimulationController {
 
     public static void setLightPatternVisible(boolean visible) {
         if(visible) {
-            pane.add(pane.light_pattern, 100);
+            pane.add(pane.light_pattern, JLayeredPane.DEFAULT_LAYER);
+            pane.setLayer(pane.light_pattern, 100);
         } else {
             pane.remove(pane.light_pattern);
         }
@@ -93,7 +96,8 @@ public class SimulationController {
 
     public static void setSensorLayoutVisible(boolean visible) {
         if(visible) {
-            pane.add(pane.sensor_layout, 20);
+            pane.add(pane.sensor_layout, JLayeredPane.DEFAULT_LAYER);
+            pane.setLayer(pane.sensor_layout, 20);
         } else {
             pane.remove(pane.sensor_layout);
         }
