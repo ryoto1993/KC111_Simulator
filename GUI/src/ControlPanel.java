@@ -1,5 +1,3 @@
-import com.sun.tools.javac.tree.JCTree;
-
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -14,6 +12,7 @@ public class ControlPanel extends JPanel implements ActionListener, ChangeListen
 
     public ControlPanel() {
         this.setLayout(new GridLayout(5, 1));
+        this.setPreferredSize(new Dimension(getWidth(), 150));
 
         // 照明表示/非表示切り替え
         JCheckBox ck_showLight = new JCheckBox("照明");

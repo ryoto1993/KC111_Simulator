@@ -20,6 +20,13 @@ public class LayoutPane extends JLayeredPane{
         this.setPreferredSize(parent_dimension);
         this.setSize(parent_dimension);
 
+        JPanel background = new JPanel();
+        background.setBackground(Color.white);
+        background.setOpaque(true);
+        background.setBounds(0, 0, getWidth(), getHeight());
+        this.add(background, JLayeredPane.DEFAULT_LAYER);
+        this.setLayer(background, -1000);
+
         SimulationController.setLight();
         SimulationController.setLightHistory();
 
@@ -43,7 +50,6 @@ public class LayoutPane extends JLayeredPane{
         room_layout.setURI("svg/KC111_Ceiling.svg");
         room_layout.setBounds(getWidth()/2-(ROOM_WIDTH /2), (getHeight()-30)/2-(ROOM_HEIGHT /2), ROOM_WIDTH, ROOM_HEIGHT);
         room_layout.setOpaque(false);
-        room_layout.setBackground(null);
     }
 
     public void setLight_layout() {
@@ -88,7 +94,8 @@ public class LayoutPane extends JLayeredPane{
 
     public void setRoomLayoutVisible(boolean visible) {
         if(visible) {
-            this.add(room_layout, JLayeredPane.FRAME_CONTENT_LAYER);
+            this.add(room_layout, JLayeredPane.DEFAULT_LAYER);
+            this.setLayer(room_layout, 0);
         } else {
             this.remove(room_layout);
         }
