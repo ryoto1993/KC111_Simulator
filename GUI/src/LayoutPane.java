@@ -1,6 +1,4 @@
 import javax.swing.*;
-
-import javafx.scene.layout.Background;
 import org.apache.batik.swing.*;
 
 import java.awt.*;
@@ -10,7 +8,7 @@ import java.util.ArrayList;
  * Created by RyotoTomioka on 2016/05/26.
  */
 public class LayoutPane extends JLayeredPane{
-    public JPanel light_layout, sensor_layout;
+    public JPanel light_layout, luminosity_layout, sensor_layout;
     public KC111Canvas light_pattern;
     private JSVGCanvas room_layout;
 
@@ -29,11 +27,15 @@ public class LayoutPane extends JLayeredPane{
         setRoom_layout();
         setSensor_layout();
         setLight_Pattern();
+        setLuminosity_layout();
 
         SimulationController.setLightPatternVisible(true);
         SimulationController.setSensorLayoutVisible(true);
         SimulationController.setLightLayoutVisible(true);
+        SimulationController.setLuminosityLabelVisible(true);
         setRoomLayoutVisible(true);
+
+        SimulationController.setStep(0);
     }
 
     public void setRoom_layout() {
@@ -50,14 +52,10 @@ public class LayoutPane extends JLayeredPane{
         light_layout.setBounds(2+getWidth()/2-(ROOM_WIDTH /2), 6+(getHeight()-30)/2-(ROOM_HEIGHT /2), ROOM_WIDTH -4, ROOM_HEIGHT -12);
         light_layout.setLayout(null);
 
-        ArrayList<Light> lights = SimulationController.lights;
-        JSVGCanvas lightCanvas[] = new JSVGCanvas[lights.size()];
-        for(int i = 0; i<lights.size(); i++) {
-            lightCanvas[i] = new JSVGCanvas();
-            lightCanvas[i].setURI("svg/light.svg");
-            lightCanvas[i].setBounds((lights.get(i).getX()-1)*50, (lights.get(i).getY()-1)*50, 50, 50);
-            light_layout.add(lightCanvas[i]);
+        for (JSVGCanvas canvas : SimulationController.light_canbas) {
+            light_layout.add(canvas);
         }
+
     }
 
     public void setSensor_layout() {
@@ -67,11 +65,25 @@ public class LayoutPane extends JLayeredPane{
         sensor_layout.setLayout(null);
     }
 
+    public void setLuminosity_layout() {
+        luminosity_layout = new JPanel();
+        luminosity_layout.setOpaque(false);
+        luminosity_layout.setBounds(2+getWidth()/2-(ROOM_WIDTH /2), 6+(getHeight()-30)/2-(ROOM_HEIGHT /2), ROOM_WIDTH -4, ROOM_HEIGHT -12);
+        luminosity_layout.setLayout(null);
+
+        ArrayList<Light> lights = SimulationController.lights;
+        ArrayList<JLabel> labels = SimulationController.luminosity_labels;
+        for(int i=0; i<lights.size(); i++) {
+            labels.get(i).setHorizontalAlignment(JLabel.CENTER);
+            labels.get(i).setBounds((lights.get(i).getX()-1)*50, (lights.get(i).getY()-1)*50, 50, 50);
+            luminosity_layout.add(labels.get(i));
+        }
+    }
+
     public void setLight_Pattern() {
         light_pattern = new KC111Canvas();
         light_pattern.setBounds(2+getWidth()/2-(ROOM_WIDTH /2), 6+(getHeight()-30)/2-(ROOM_HEIGHT /2), ROOM_WIDTH -4, ROOM_HEIGHT -12);
         light_pattern.setOpaque(false);
-
     }
 
     public void setRoomLayoutVisible(boolean visible) {

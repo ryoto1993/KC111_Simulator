@@ -29,6 +29,13 @@ public class ControlPanel extends JPanel implements ActionListener, ChangeListen
         ck_showPattern.setSelected(true);
         this.add(ck_showPattern);
 
+        // 照明点灯光度による色の切り替え
+        JCheckBox ck_changeColor = new JCheckBox("照明点灯光度による色の切り替え");
+        ck_changeColor.setActionCommand("changeColor");
+        ck_changeColor.addActionListener(this);
+        ck_changeColor.setSelected(false);
+        this.add(ck_changeColor);
+
         // ステップの切り替え
         JSlider sl_step = new JSlider(0, 1000, 0);
         sl_step.addChangeListener(this);
@@ -45,14 +52,16 @@ public class ControlPanel extends JPanel implements ActionListener, ChangeListen
             } else {
                 SimulationController.setLightLayoutVisible(false);
             }
-        }
-        else if(e.getActionCommand().equals("showPattern")) {
+        } else if(e.getActionCommand().equals("showPattern")) {
             JCheckBox tmp = (JCheckBox) e.getSource();
             if(tmp.isSelected()) {
                 SimulationController.setLightPatternVisible(true);
             } else {
                 SimulationController.setLightPatternVisible(false);
             }
+        } else if(e.getActionCommand().equals("changeColor")) {
+            JCheckBox tmp = (JCheckBox) e.getSource();
+            SimulationController.lightColorChangeMode = tmp.isSelected();
         }
     }
 
