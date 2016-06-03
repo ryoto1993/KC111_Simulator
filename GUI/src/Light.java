@@ -35,4 +35,8 @@ public class Light {
     public int getLum(int s) {
         return lum_history.get(s);
     }
+
+    public ArrayList<Integer> getLum_history() {
+        return lum_history;
+    }
 }

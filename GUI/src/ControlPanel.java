@@ -37,14 +37,23 @@ public class ControlPanel extends JPanel implements ActionListener, ChangeListen
 
         // アニメーションパネル
         JPanel animationPanel = new JPanel();
-        animationPanel.setPreferredSize(new Dimension(getWidth(), 30));
+        animationPanel.setPreferredSize(new Dimension(getWidth(), 20));
         animationPanel.setLayout(new FlowLayout());
 
         JButton btn_play = new JButton("Play");
         btn_play.setActionCommand("btn_play");
+        btn_play.addActionListener(this);
         animationPanel.add(btn_play);
 
-        this.add(btn_play);
+        JButton btn_stop = new JButton("Stop");
+        btn_stop.setActionCommand("btn_stop");
+        btn_stop.addActionListener(this);
+        animationPanel.add(btn_stop);
+
+        JSlider sl_anim = SimulationController.animationSpeed;
+        animationPanel.add(sl_anim);
+
+        this.add(animationPanel);
 
 
         // ステップの切り替え
@@ -53,7 +62,8 @@ public class ControlPanel extends JPanel implements ActionListener, ChangeListen
         GridBagLayout gbl = new GridBagLayout();
         stepPanel.setLayout(gbl);
 
-        JSlider sl_step = new JSlider(0, 1000, 0);
+        JSlider sl_step = new JSlider(0, SimulationController.stepMax, 0);
+        SimulationController.sl_step = sl_step;
         sl_step.addChangeListener(this);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 1;
@@ -95,6 +105,10 @@ public class ControlPanel extends JPanel implements ActionListener, ChangeListen
         } else if(e.getActionCommand().equals("changeColor")) {
             JCheckBox tmp = (JCheckBox) e.getSource();
             SimulationController.lightColorChangeMode = tmp.isSelected();
+        } else if(e.getActionCommand().equals("btn_play")) {
+            SimulationController.startAnimation();
+        } else if(e.getActionCommand().equals("btn_stop")) {
+            SimulationController.stopAnimation();
         }
     }
 

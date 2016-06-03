@@ -16,8 +16,12 @@ public class SimulationController {
     public static ArrayList<JLabel> luminosity_labels = new ArrayList<>();
     public static ArrayList<JSVGCanvas> light_canbas = new ArrayList<>();
     private static int step = 0;
+    public static int stepMax = 1000;
     public static boolean lightColorChangeMode = false;
     public static JLabel stepLabel = new JLabel();
+    public static JSlider animationSpeed = new JSlider(1, 20);
+    public static JSlider sl_step = new JSlider();
+    private static AnimationThread thread;
 
 
     public static void setLight() {
@@ -77,6 +81,8 @@ public class SimulationController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        SimulationController.stepMax = lights.get(0).getLum_history().size() - 1;
+
     }
 
     public static void setLayoutPane(LayoutPane p) {
@@ -135,6 +141,7 @@ public class SimulationController {
         step = s;
 
         stepLabel.setText("Step " + step);
+        sl_step.setValue(step);
 
         if(lightColorChangeMode) {
             for (int i = 0; i < lights.size(); i++) {
@@ -157,10 +164,35 @@ public class SimulationController {
     public static void updateCanvas() {
         canvas.repaint();
     }
+
+    public static void startAnimation() {
+        thread = new AnimationThread();
+        thread.start();
+    }
+
+    public static void stopAnimation() {
+        thread.stopThread();
+    }
 }
 
 class AnimationThread extends Thread {
-    public void run() {
+    private boolean isActive = true;
 
+    public void run() {
+        while(isActive) {
+            try {
+                sleep(20 * (21-SimulationController.animationSpeed.getValue()));
+            } catch (InterruptedException e) {}
+            if(SimulationController.getStep()!=SimulationController.stepMax) {
+                SimulationController.setStep(SimulationController.getStep() + 1);
+                SimulationController.updateCanvas();
+            } else {
+                isActive = false;
+            }
+        }
+    }
+
+    public void stopThread() {
+        isActive = false;
     }
 }
