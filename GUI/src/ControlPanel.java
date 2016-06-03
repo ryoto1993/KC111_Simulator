@@ -35,10 +35,44 @@ public class ControlPanel extends JPanel implements ActionListener, ChangeListen
         ck_changeColor.setSelected(false);
         this.add(ck_changeColor);
 
+        // アニメーションパネル
+        JPanel animationPanel = new JPanel();
+        animationPanel.setPreferredSize(new Dimension(getWidth(), 30));
+        animationPanel.setLayout(new FlowLayout());
+
+        JButton btn_play = new JButton("Play");
+        btn_play.setActionCommand("btn_play");
+        animationPanel.add(btn_play);
+
+        this.add(btn_play);
+
+
         // ステップの切り替え
+        JPanel stepPanel = new JPanel();
+        stepPanel.setPreferredSize(new Dimension(getWidth(), 30));
+        GridBagLayout gbl = new GridBagLayout();
+        stepPanel.setLayout(gbl);
+
         JSlider sl_step = new JSlider(0, 1000, 0);
         sl_step.addChangeListener(this);
-        this.add(sl_step);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.weightx = 0.9;
+        gbc.insets = new Insets(0, 10, 0, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbl.setConstraints(sl_step, gbc);
+        stepPanel.add(sl_step);
+
+        JLabel stepLabel = SimulationController.stepLabel;
+        stepLabel.setFont(new Font("" ,Font.PLAIN, 20));
+        gbc.gridx = 0;
+        gbc.weightx = 0.1;
+        stepLabel.setText("Step 0");
+        gbl.setConstraints(stepLabel, gbc);
+        stepPanel.add(stepLabel);
+
+        this.add(stepPanel);
 
     }
 

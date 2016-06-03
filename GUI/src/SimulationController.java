@@ -17,6 +17,7 @@ public class SimulationController {
     public static ArrayList<JSVGCanvas> light_canbas = new ArrayList<>();
     private static int step = 0;
     public static boolean lightColorChangeMode = false;
+    public static JLabel stepLabel = new JLabel();
 
 
     public static void setLight() {
@@ -133,6 +134,8 @@ public class SimulationController {
     public static void setStep(int s) {
         step = s;
 
+        stepLabel.setText("Step " + step);
+
         if(lightColorChangeMode) {
             for (int i = 0; i < lights.size(); i++) {
                 double lum = (double) lights.get(i).getLum(step);
@@ -153,5 +156,11 @@ public class SimulationController {
 
     public static void updateCanvas() {
         canvas.repaint();
+    }
+}
+
+class AnimationThread extends Thread {
+    public void run() {
+
     }
 }
