@@ -94,7 +94,7 @@ public class SimulationController {
 
     public static void setLightHistory() {
         try {
-            File csv = new File("data/light_history.csv"); // CSVデータファイル
+            File csv = new File("data/coef1_1->32_light_hist.csv"); // CSVデータファイル
             BufferedReader br = new BufferedReader(new FileReader(csv));
 
             // 最終行まで読み込む
@@ -162,7 +162,7 @@ public class SimulationController {
     public static void setSensorLayoutVisible(boolean visible) {
         if(visible) {
             pane.add(pane.sensor_layout, JLayeredPane.DEFAULT_LAYER);
-            pane.setLayer(pane.sensor_layout, 20);
+            pane.setLayer(pane.sensor_layout, 120);
         } else {
             pane.remove(pane.sensor_layout);
         }
