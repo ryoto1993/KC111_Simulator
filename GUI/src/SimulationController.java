@@ -58,7 +58,7 @@ public class SimulationController {
 
     public static void setLightHistory() {
         try {
-            File csv = new File("data/light_history.csv"); // CSVデータファイル
+            File csv = new File("data/coef1_1->32_light_hist.csv"); // CSVデータファイル
             BufferedReader br = new BufferedReader(new FileReader(csv));
 
             // 最終行まで読み込む
