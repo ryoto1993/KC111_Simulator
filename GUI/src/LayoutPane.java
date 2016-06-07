@@ -29,6 +29,7 @@ public class LayoutPane extends JLayeredPane{
 
         SimulationController.setLight();
         SimulationController.setLightHistory();
+        SimulationController.setSensor();
 
         setLight_layout();
         setRoom_layout();
@@ -58,7 +59,7 @@ public class LayoutPane extends JLayeredPane{
         light_layout.setBounds(2+getWidth()/2-(ROOM_WIDTH /2), 6+(getHeight()-30)/2-(ROOM_HEIGHT /2), ROOM_WIDTH -4, ROOM_HEIGHT -12);
         light_layout.setLayout(null);
 
-        for (JSVGCanvas canvas : SimulationController.light_canbas) {
+        for (JSVGCanvas canvas : SimulationController.light_canvas) {
             light_layout.add(canvas);
         }
 
@@ -69,6 +70,10 @@ public class LayoutPane extends JLayeredPane{
         sensor_layout.setOpaque(false);
         sensor_layout.setBounds(2+getWidth()/2-(ROOM_WIDTH /2), 6+(getHeight()-30)/2-(ROOM_HEIGHT /2), ROOM_WIDTH -4, ROOM_HEIGHT -12);
         sensor_layout.setLayout(null);
+
+        for (JSVGCanvas canvas : SimulationController.sensor_canvas) {
+            sensor_layout.add(canvas);
+        }
     }
 
     public void setLuminosity_layout() {

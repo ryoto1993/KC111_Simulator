@@ -17,7 +17,8 @@ public class SimulationController {
     public static ArrayList<JLabel> luminosityLabels = new ArrayList<>();
     public static ArrayList<JLabel> luminanceLabels = new ArrayList<>();
     public static ArrayList<JLabel> targetLuminanceLabels = new ArrayList<>();
-    public static ArrayList<JSVGCanvas> light_canbas = new ArrayList<>();
+    public static ArrayList<JSVGCanvas> light_canvas = new ArrayList<>();
+    public static ArrayList<JSVGCanvas> sensor_canvas = new ArrayList<>();
     private static int step = 0;
     public static int stepMax = 1000;
     public static boolean lightColorChangeMode = false;
@@ -48,7 +49,7 @@ public class SimulationController {
                     canvas.setURI("svg/light_op.svg");
                     canvas.setBounds((lights.get(lights.size()-1).getX()-1)*50, (lights.get(lights.size()-1).getY()-1)*50, 50, 50);
                     canvas.setBackground(new Color(242, 150, 0));
-                    light_canbas.add(canvas);
+                    light_canvas.add(canvas);
                 }
             }
             br.close();
@@ -79,9 +80,8 @@ public class SimulationController {
 
                     JSVGCanvas canvas = new JSVGCanvas();
                     canvas.setURI("svg/sensor.svg");
-                    canvas.setBounds((lights.get(lights.size()-1).getX()-1)*50, (lights.get(lights.size()-1).getY()-1)*50, 50, 50);
-                    canvas.setBackground(new Color(242, 150, 0));
-                    light_canbas.add(canvas);
+                    canvas.setBounds((int)((sensors.get(sensors.size()-1).getX())*50-15), (int)((sensors.get(sensors.size()-1).getY())*50-15), 30, 30);
+                    sensor_canvas.add(canvas);
                 }
             }
             br.close();
@@ -187,12 +187,12 @@ public class SimulationController {
                 int r = (int) (204 + 38 * (lum / max));
                 int g = (int) (204 - 54 * (lum / max));
                 int b = (int) (204 - 204 * (lum / max));
-                light_canbas.get(i).setBackground(new Color(r, g, b));
+                light_canvas.get(i).setBackground(new Color(r, g, b));
             }
         } else {
             for (int i=0; i<lights.size(); i++) {
                 luminosityLabels.get(i).setText(Integer.toString(lights.get(i).getLum(step)) + " cd");
-                light_canbas.get(i).setBackground(new Color(242, 150, 0));
+                light_canvas.get(i).setBackground(new Color(242, 150, 0));
             }
         }
     }
