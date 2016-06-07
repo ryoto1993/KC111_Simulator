@@ -78,7 +78,7 @@ public class LayoutPane extends JLayeredPane{
         luminosity_layout.setLayout(null);
 
         ArrayList<Light> lights = SimulationController.lights;
-        ArrayList<JLabel> labels = SimulationController.luminosity_labels;
+        ArrayList<JLabel> labels = SimulationController.luminosityLabels;
         for(int i=0; i<lights.size(); i++) {
             labels.get(i).setHorizontalAlignment(JLabel.CENTER);
             labels.get(i).setBounds((lights.get(i).getX()-1)*50, (lights.get(i).getY()-1)*50, 50, 50);

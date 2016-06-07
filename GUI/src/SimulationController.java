@@ -13,7 +13,10 @@ public class SimulationController {
     private static LayoutPane pane;
     private static KC111Canvas canvas;
     public static ArrayList<Light> lights = new ArrayList<>();
-    public static ArrayList<JLabel> luminosity_labels = new ArrayList<>();
+    public static ArrayList<Sensor> sensors = new ArrayList<>();
+    public static ArrayList<JLabel> luminosityLabels = new ArrayList<>();
+    public static ArrayList<JLabel> luminanceLabels = new ArrayList<>();
+    public static ArrayList<JLabel> targetLuminanceLabels = new ArrayList<>();
     public static ArrayList<JSVGCanvas> light_canbas = new ArrayList<>();
     private static int step = 0;
     public static int stepMax = 1000;
@@ -39,7 +42,7 @@ public class SimulationController {
                 while (st.hasMoreTokens()) {
                     // 1行の各要素をタブ区切りで表示
                     lights.add(new Light(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())));
-                    luminosity_labels.add(new JLabel());
+                    luminosityLabels.add(new JLabel());
 
                     JSVGCanvas canvas = new JSVGCanvas();
                     canvas.setURI("svg/light_op.svg");
@@ -56,9 +59,42 @@ public class SimulationController {
         }
     }
 
+    public static void setSensor() {
+        try {
+            File csv = new File("data/sensor.csv"); // CSVデータファイル
+            BufferedReader br = new BufferedReader(new FileReader(csv));
+
+            // 最終行まで読み込む
+            String line = "";
+            while ((line = br.readLine()) != null) {
+
+                // 1行をデータの要素に分割
+                StringTokenizer st = new StringTokenizer(line, ",");
+
+                while (st.hasMoreTokens()) {
+                    // 1行の各要素をタブ区切りで表示
+                    sensors.add(new Sensor(Double.parseDouble(st.nextToken()), Double.parseDouble(st.nextToken())));
+                    luminanceLabels.add(new JLabel());
+                    targetLuminanceLabels.add(new JLabel());
+
+                    JSVGCanvas canvas = new JSVGCanvas();
+                    canvas.setURI("svg/sensor.svg");
+                    canvas.setBounds((lights.get(lights.size()-1).getX()-1)*50, (lights.get(lights.size()-1).getY()-1)*50, 50, 50);
+                    canvas.setBackground(new Color(242, 150, 0));
+                    light_canbas.add(canvas);
+                }
+            }
+            br.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void setLightHistory() {
         try {
-            File csv = new File("data/coef1_1->32_light_hist.csv"); // CSVデータファイル
+            File csv = new File("data/light_history.csv"); // CSVデータファイル
             BufferedReader br = new BufferedReader(new FileReader(csv));
 
             // 最終行まで読み込む
@@ -147,7 +183,7 @@ public class SimulationController {
             for (int i = 0; i < lights.size(); i++) {
                 double lum = (double) lights.get(i).getLum(step);
                 double max = Light.MAXLUM;
-                luminosity_labels.get(i).setText(Integer.toString(lights.get(i).getLum(step)) + " cd");
+                luminosityLabels.get(i).setText(Integer.toString(lights.get(i).getLum(step)) + " cd");
                 int r = (int) (204 + 38 * (lum / max));
                 int g = (int) (204 - 54 * (lum / max));
                 int b = (int) (204 - 204 * (lum / max));
@@ -155,7 +191,7 @@ public class SimulationController {
             }
         } else {
             for (int i=0; i<lights.size(); i++) {
-                luminosity_labels.get(i).setText(Integer.toString(lights.get(i).getLum(step)) + " cd");
+                luminosityLabels.get(i).setText(Integer.toString(lights.get(i).getLum(step)) + " cd");
                 light_canbas.get(i).setBackground(new Color(242, 150, 0));
             }
         }
